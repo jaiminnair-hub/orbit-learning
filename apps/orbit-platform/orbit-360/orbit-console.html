@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Orbit 360 Feedback administration workspace">
+    <title>Orbit | 360 Feedback</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="orbit-console.css?v=20260821">
+    <link rel="stylesheet" href="orbit-console-enhancements.css?v=20260821">
+    <link rel="stylesheet" href="orbit-sanskrit.css?v=1">
+  </head>
+  <body>
+    <main class="access-screen" id="auth-screen">
+      <section class="access-card">
+        <a class="brand" href="/"><span>O</span> Orbit</a>
+        <p class="eyebrow">Orbit 360 Feedback</p>
+        <h1>Sign in to 360 Feedback.</h1>
+        <p class="muted">Use your work email and password to open the confidential 360 workspace available for your organization.</p>
+        <label class="field-label" for="auth-email">Work email</label>
+        <input id="auth-email" type="email" autocomplete="email" placeholder="you@company.com">
+        <label class="field-label" for="auth-password">Password</label>
+        <input id="auth-password" type="password" autocomplete="current-password" minlength="10" placeholder="Your password">
+        <button class="button primary" id="password-sign-in">Sign in <span>→</span></button>
+        <button class="auth-link" id="reset-password">Set or reset my password</button>
+        <button class="auth-link auth-link-emphasis" id="open-signup">New to Orbit? Create your company workspace</button>
+        <p class="form-note" id="auth-note">Use password setup only for an existing Orbit account. New companies can create a workspace below.</p>
+      </section>
+      <aside class="access-art" aria-hidden="true">
+        <div class="mini-card feedback"><small>360 Feedback</small><b>Confidential by design</b></div>
+        <div class="mini-card growth"><small>Orbit Growth</small><b>Goals with momentum</b></div>
+        <div class="mini-card learning"><small>Learning</small><b>Paths that build skill</b></div>
+      </aside>
+    </main>
+
+    <main class="reset-screen hidden" id="signup-screen">
+      <section class="setup-card password-card">
+        <a class="brand" href="/"><span>O</span> Orbit</a>
+        <p class="eyebrow">Start with Orbit</p>
+        <h1>Create your company workspace.</h1>
+        <p class="muted">Set up the first administrator account for your organization. You can invite your team later.</p>
+        <form id="signup-form">
+          <label class="field-label" for="signup-email">Work email</label>
+          <input id="signup-email" type="email" autocomplete="email" required placeholder="you@company.com">
+          <label class="field-label" for="signup-password">Create a password</label>
+          <input id="signup-password" type="password" autocomplete="new-password" minlength="10" required placeholder="At least 10 characters">
+          <label class="field-label" for="signup-password-confirm">Confirm password</label>
+          <input id="signup-password-confirm" type="password" autocomplete="new-password" minlength="10" required placeholder="Type it once more">
+          <button class="button primary" type="submit">Create workspace <span>→</span></button>
+        </form>
+        <button class="auth-link" id="back-to-signin">Already have an account? Sign in</button>
+        <p class="form-note" id="signup-note"></p>
+      </section>
+    </main>
+
+    <main class="reset-screen hidden" id="reset-screen">
+      <section class="setup-card password-card">
+        <a class="brand" href="/"><span>O</span> Orbit</a>
+        <p class="eyebrow">Secure account setup</p>
+        <h1>Create your new password.</h1>
+        <p class="muted">Choose a password with at least 10 characters. You will use it to sign in to Orbit from now on.</p>
+        <form id="password-reset-form">
+          <label class="field-label" for="new-password">New password</label>
+          <input id="new-password" type="password" autocomplete="new-password" minlength="10" required>
+          <label class="field-label" for="confirm-password">Confirm new password</label>
+          <input id="confirm-password" type="password" autocomplete="new-password" minlength="10" required>
+          <button class="button primary" type="submit">Save password <span>→</span></button>
+        </form>
+        <p class="form-note" id="password-reset-note"></p>
+      </section>
+    </main>
+
+    <main class="reset-screen hidden" id="confirm-screen">
+      <section class="setup-card password-card">
+        <a class="brand" href="/"><span>O</span> Orbit</a>
+        <p class="eyebrow">Secure account setup</p>
+        <h1 id="confirmation-title">Set up your Orbit password.</h1>
+        <p class="muted" id="confirmation-copy">You are about to securely create a password for your people workspace.</p>
+        <button class="button primary" id="continue-password-setup">Continue securely <span>→</span></button>
+        <p class="form-note">For your protection, this short confirmation step prevents email security tools from using the link before you do.</p>
+      </section>
+    </main>
+
+    <main class="setup-screen hidden" id="setup-screen">
+      <section class="setup-card">
+        <a class="brand" href="/"><span>O</span> Orbit</a>
+        <p class="eyebrow">First-time setup</p>
+        <h1>Create your organization.</h1>
+        <p class="muted">You will become the organization owner. You can invite colleagues and enable products afterwards.</p>
+        <form id="organization-form">
+          <label class="field-label" for="organization-name">Organization name</label>
+          <input id="organization-name" required maxlength="160" placeholder="Acme India">
+          <label class="field-label" for="organization-slug">Workspace URL</label>
+          <div class="slug-field"><span>orbit.app/</span><input id="organization-slug" required pattern="[a-z0-9-]+" placeholder="acme-india"></div>
+          <button class="button primary" type="submit">Create organization <span>→</span></button>
+        </form>
+        <p class="form-note" id="setup-note"></p>
+      </section>
+    </main>
+
+    <main class="setup-screen hidden" id="no-access-screen">
+      <section class="setup-card access-resolution-card">
+        <a class="brand" href="/"><span>O</span> Orbit</a>
+        <p class="eyebrow">Account connected</p>
+        <h1>Your 360 access is not connected yet.</h1>
+        <p class="muted">You signed in successfully, but this work account is not yet a member of an Orbit organization with 360 Feedback access.</p>
+        <div class="access-resolution-steps">
+          <p><b>Joining an existing organization?</b><br>Use the invitation sent by its Orbit administrator, then sign in again with that same work email.</p>
+          <p><b>Starting Orbit for a new organization?</b><br>Create a workspace below. You will become its owner and can enable a 360 trial.</p>
+        </div>
+        <button class="button primary" id="create-organization-from-access">Create a new organization <span>→</span></button>
+        <button class="auth-link" id="try-another-account">Try another work account</button>
+        <p class="form-note">Learning and 360 currently use separate secure account access. A Learning sign-in alone does not grant 360 access.</p>
+      </section>
+    </main>
+
+    <main class="app hidden" id="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/"><span>O</span> Orbit</a>
+        <div class="organization-picker">
+          <label for="organization-select">Organization</label>
+          <select id="organization-select"></select>
+        </div>
+        <div class="topbar-actions">
+          <span id="trial-badge" class="trial-badge hidden"></span>
+          <button class="text-button" id="set-password">Set password</button>
+          <button class="text-button" id="sign-out">Sign out</button>
+          <span class="avatar" id="avatar">O</span>
+        </div>
+      </header>
+
+      <div class="product-strip" id="product-strip"></div>
+
+      <section class="product-gate hidden" id="product-gate">
+        <div class="gate-copy">
+          <p class="eyebrow">360 Degree Feedback · workspace setup</p>
+          <h1>Turn many perspectives into one clear next step.</h1>
+          <p>Activate a private 360 workspace for your organization. Build a thoughtful cycle, invite the right people, and release insights without exposing anonymous voices.</p>
+          <button class="button primary" id="start-trial">Activate 360 workspace <span>→</span></button>
+          <p class="form-note" id="trial-note"></p>
+          <p class="gate-assurance"><span>✓</span> 14-day trial · up to 25 seats · confidential by design</p>
+        </div>
+        <div class="gate-grid">
+          <p class="gate-grid-label">ORBIT 360 · HOW IT WORKS</p>
+          <article class="gate-flow-card gate-flow-one"><span>01</span><div><small>Design</small><b>Build a trusted cycle</b></div><em>→</em></article>
+          <article class="gate-flow-card gate-flow-two"><span>02</span><div><small>Invite</small><b>Choose thoughtful raters</b></div><em>→</em></article>
+          <article class="gate-flow-card gate-flow-three"><span>03</span><div><small>Grow</small><b>Release themes, not identities</b></div><em>→</em></article>
+          <div class="privacy-marker"><i>✦</i><span>Anonymous groups<br>protected</span></div>
+        </div>
+      </section>
+
+      <section class="workspace hidden" id="feedback-workspace">
+        <aside class="sidebar">
+          <p class="eyebrow">360 Feedback</p>
+          <button class="nav-item active" data-view="overview">Home</button>
+          <button class="nav-item" data-view="cycle">Cycles</button>
+          <button class="nav-item" data-view="directory">People</button>
+          <button class="nav-item" data-view="raters">Questions &amp; reviewers</button>
+          <button class="nav-item" data-view="reports">Reports</button>
+          <div class="sidebar-foot">Private data is visible only to authorized people and never exposes anonymous rater identities.</div>
+        </aside>
+
+        <div class="workspace-content">
+          <section class="view active" data-panel="overview">
+            <div class="overview-hero">
+              <div>
+                <p class="eyebrow">360 Degree Feedback</p>
+                <h1>Your 360 workspace.</h1>
+                <p class="muted">Choose the one next action that moves your feedback cycle forward.</p>
+              </div>
+              <div class="privacy-pill"><span>✦</span><div><b>Confidential by design</b><small>Anonymous voices stay protected</small></div></div>
+            </div>
+            <div class="today-grid">
+              <button class="today-card today-card-primary" data-jump="cycle" data-focus="cycle-name"><span class="today-number">01</span><span class="today-arrow">→</span><b>Create or continue a cycle</b><small>Set the purpose, dates, and privacy threshold before the cycle goes live.</small></button>
+              <button class="today-card" data-jump="cycle" data-focus="question-prompt"><span class="today-number">02</span><span class="today-arrow">→</span><b>Build the question set</b><small>Use focused questions that reviewers can answer with confidence.</small></button>
+              <button class="today-card" data-jump="directory"><span class="today-number">03</span><span class="today-arrow">→</span><b>Add the right people</b><small>Import the workforce, choose subjects, then select reviewers carefully.</small></button>
+              <button class="today-card" data-jump="reports"><span class="today-number">04</span><span class="today-arrow">→</span><b>Review protected reports</b><small>Release insight only after a cycle is closed and anonymity rules hold.</small></button>
+            </div>
+            <div class="overview-divider"><span>Workspace pulse</span><p>Your first 360 cycle starts with a clear purpose and one well-designed question.</p></div>
+            <div class="metric-grid">
+              <article><span>Cycles</span><strong id="cycle-count">0</strong><small>Draft, live, and closed</small></article>
+              <article><span>Participants</span><strong id="participant-count">0</strong><small>Across all cycles</small></article>
+              <article><span>Reviewer tasks</span><strong id="task-count">0</strong><small>Private assignments</small></article>
+            </div>
+            <article class="callout"><b>Recommended next step</b><p id="next-action">Create your first feedback cycle.</p><button class="button secondary" data-jump="cycle" data-focus="cycle-name">Begin a cycle <span>→</span></button><a class="text-button" href="quick-cycle.html">⚡ Or try quick create — one screen, a few steps <span>→</span></a></article>
+          </section>
+
+          <section class="view" data-panel="directory">
+            <div class="directory-hero">
+              <div>
+                <p class="eyebrow">People directory</p>
+                <h2>Bring your workforce together.</h2>
+                <p>Import your employee directory once. People become ready for programmes without automatically receiving an account, email, or survey.</p>
+              </div>
+              <div class="directory-promise"><span>✓</span><div><b>Private import</b><small>No invitations are sent when people are added.</small></div></div>
+            </div>
+            <div class="directory-value-grid">
+              <article><span>01</span><b>Upload your file</b><small>Excel or CSV works. We read the file privately in your browser.</small></article>
+              <article><span>02</span><b>Review the people</b><small>Check names, roles, managers, and any missing information.</small></article>
+              <article><span>03</span><b>Use them when ready</b><small>Select people for 360 cycles and invite only the people who need access.</small></article>
+            </div>
+            <section class="import-card" id="directory-import-card">
+              <div class="import-copy"><p class="eyebrow">Add people</p><h3>Import your employee directory</h3><p>Choose your workforce file to preview it before a single person is added.</p></div>
+              <label class="file-picker" for="directory-file"><input id="directory-file" type="file" accept=".xlsx,.xls,.csv"><span class="file-icon">↑</span><span><b>Choose Excel or CSV file</b><small id="directory-file-name">No file selected</small></span></label>
+              <div class="import-preview hidden" id="directory-import-preview"></div>
+              <div class="import-actions hidden" id="directory-import-actions"><button class="button primary" id="import-directory">Import people <span>→</span></button><button class="text-button" id="clear-directory-file">Choose another file</button></div>
+              <p class="form-note" id="directory-import-note"></p>
+            </section>
+            <section class="list-card directory-list-card"><div class="list-head"><div><p class="eyebrow">Your workforce</p><h3>People in this workspace <span id="directory-count">0</span></h3></div><small id="directory-status">Ready for your first import</small></div><div class="form-grid" id="directory-correction-form"><label>Person<select id="directory-person-to-edit"><option value="">Select a person</option></select></label><label>Work email<input id="directory-email-to-edit" type="email" placeholder="name@company.com" autocomplete="email"></label></div><div class="import-actions" id="directory-correction-actions"><button class="button secondary" id="save-directory-email">Save email correction</button></div><p class="form-note" id="directory-correction-note">Use this only to correct a private directory record. It does not send an invitation.</p><div id="directory-list" class="empty-state">Your imported workforce will appear here.</div></section>
+          </section>
+
+          <section class="view" data-panel="cycle">
+            <div class="cycle-journey-head">
+              <div>
+                <p class="eyebrow">Cycle builder</p>
+                <h2>Create a 360 people will trust.</h2>
+                <p>Set the intent first, then bring the right voices and questions together before you launch.</p>
+                <a class="text-button" href="quick-cycle.html">⚡ Try quick create instead — one screen, a few steps</a>
+              </div>
+              <aside class="journey-assurance"><span>✦</span><div><b>Privacy checks built in</b><small>Anonymous groups are protected before launch</small></div></aside>
+            </div>
+            <ol class="cycle-steps" aria-label="Create a 360 cycle">
+              <li class="active"><span>01</span><b>Set the frame</b><small>Purpose, dates, privacy</small></li>
+              <li><span>02</span><b>Shape questions</b><small>What people will reflect on</small></li>
+              <li><span>03</span><b>Choose people</b><small>Who receives feedback</small></li>
+              <li><span>04</span><b>Invite voices</b><small>Managers, peers, reports</small></li>
+              <li><span>05</span><b>Review & launch</b><small>One final quality check</small></li>
+            </ol>
+            <form class="builder-card builder-stage" id="cycle-form">
+              <div class="stage-label"><span>01</span><div><b>Set the frame</b><small>Tell people why this feedback matters and when it happens.</small></div></div>
+              <div class="form-grid">
+                <label>Cycle name<input id="cycle-name" required placeholder="Leadership 360 · Q4 2026"></label>
+                <label>Purpose<select id="cycle-purpose"><option value="development">Development only</option><option value="appraisal">Formal appraisal</option><option value="hybrid">Development + appraisal</option></select></label>
+                <label>Feedback opens<input id="cycle-opens" required type="datetime-local"></label>
+                <label>Feedback closes<input id="cycle-closes" required type="datetime-local"></label>
+                <label>Anonymous group threshold<select id="cycle-threshold"><option value="3">3 or more reviewers</option><option value="4">4 or more reviewers</option><option value="5">5 or more reviewers</option></select></label>
+              </div>
+              <label>Purpose and participant messaging<textarea id="cycle-description" placeholder="Explain why this feedback is happening and how it will be used."></textarea></label>
+              <div class="stage-actions"><button class="button primary" type="submit">Save and shape questions <span>→</span></button><small>Your cycle stays a private draft until you choose to launch it.</small></div>
+              <p class="form-note" id="cycle-note"></p>
+            </form>
+            <form class="builder-card builder-stage" id="question-form">
+              <div class="stage-label"><span>02</span><div><b>Shape the conversation</b><small>Use focused questions that support meaningful feedback.</small></div></div>
+              <div class="form-grid">
+                <label>Cycle<select id="question-cycle" required></select></label>
+                <label>Question type<select id="question-type"><option value="rating">1–5 rating</option><option value="open_text">Open text</option></select></label>
+              </div>
+              <label>Competency label<input id="question-competency" placeholder="Leadership"></label>
+              <label>Question wording<textarea id="question-prompt" required placeholder="For example: Creates clarity when priorities change."></textarea></label>
+              <div class="stage-actions"><button class="button secondary" type="submit">Add question <span>→</span></button><small>A balanced cycle combines clear ratings with optional written context.</small></div><p class="form-note" id="question-note"></p>
+            </form>
+            <section class="import-card question-import-card">
+              <div class="import-copy"><p class="eyebrow">Question-set upload</p><h3>Import your questions from Excel</h3><p>Use the standard format to add a prepared question set in one reviewable batch.</p><a class="text-button" href="/outputs/orbit-question-template/orbit-360-question-import-template.xlsx" download>Download question template</a></div>
+              <label class="file-picker" for="question-file"><input id="question-file" type="file" accept=".xlsx,.xls,.csv"><span class="file-icon">↑</span><span><b>Choose question file</b><small id="question-file-name">No file selected</small></span></label>
+              <div class="import-preview hidden" id="question-import-preview"></div>
+              <div class="import-actions hidden" id="question-import-actions"><button class="button primary" id="import-questions">Import questions <span>→</span></button><button class="text-button" id="clear-question-file">Choose another file</button></div>
+              <p class="form-note" id="question-import-note"></p>
+            </section>
+            <section class="list-card question-list-card"><div class="list-head"><div><p class="eyebrow">Question set</p><h3>Questions in this cycle <span id="question-count">0</span></h3></div><small>Questions stay editable while the cycle is a draft.</small></div><div id="question-list" class="empty-state">Choose a cycle above to view its questions.</div></section>
+            <div class="list-card cycle-list-card"><div class="list-head"><div><p class="eyebrow">Your workspace</p><h3>Cycles in progress</h3></div><small>Drafts are visible only to authorised administrators.</small></div><div id="cycle-list" class="empty-state">No cycles yet.</div></div>
+          </section>
+
+          <section class="view" data-panel="raters">
+            <div class="people-hero">
+              <div>
+                <p class="eyebrow">People & raters</p>
+                <h2>Invite the right perspective.</h2>
+                <p>Build a balanced view of each person—without ever compromising the confidentiality that makes feedback honest.</p>
+              </div>
+              <div class="anonymity-card"><span>◎</span><div><b>Protected group feedback</b><small>Peers, reports and external voices appear only when the group is large enough.</small></div></div>
+            </div>
+            <div class="people-flow">
+              <article><span aria-hidden="true">+</span><b>Add feedback subjects</b><small>People who will receive a report</small></article>
+              <article><span aria-hidden="true">↗</span><b>Invite perspectives</b><small>Manager, peer, report, self or external</small></article>
+              <article><span aria-hidden="true">✓</span><b>Approve the list</b><small>Only thoughtful, relevant voices proceed</small></article>
+              <article><span aria-hidden="true">◎</span><b>Collect privately</b><small>Anonymous groups stay anonymous</small></article>
+            </div>
+            <section class="builder-card audience-builder" id="audience-builder">
+              <div class="stage-label"><span>01</span><div><b>Choose who is assessed</b><small>Build the subject group from your private workforce directory.</small></div></div>
+              <div class="form-grid">
+                <label>Cycle<select id="audience-cycle" required></select></label>
+                <label>Add people by<select id="audience-scope"><option value="individual">Individual people</option><option value="department">Department</option><option value="job_title">Designation / job title</option><option value="department_job_title">Department + designation</option><option value="entire_organization">Entire active organization</option></select></label>
+              </div>
+              <div class="audience-filter-panel" id="audience-filter-panel"></div>
+              <div class="audience-current-actions" id="audience-current-actions"></div>
+              <div class="audience-group" id="audience-group"></div>
+              <div class="audience-preview" id="audience-preview"></div>
+              <div class="stage-actions"><button class="button primary" id="add-audience">Add selected people to cycle <span>→</span></button><small>The final people list is saved to this cycle and will not change when the directory changes later.</small></div>
+              <p class="form-note" id="audience-note"></p>
+            </section>
+            <section class="builder-card rater-builder" id="rater-builder">
+              <div class="stage-label"><span>03</span><div><b>Choose every perspective</b><small>Turn on the voices you need. Orbit combines them safely and removes duplicates.</small></div></div>
+              <div class="form-grid">
+                <label>Cycle<select id="rater-cycle" required></select></label>
+              </div>
+              <p class="form-note">Choose as many perspectives as you need. The final review tells you exactly how many requests each choice creates.</p>
+              <div class="perspective-grid" id="rater-perspectives">
+                <label class="perspective-option"><input type="checkbox" data-perspective="self" checked><span><b>Self</b><small>Each subject reflects on their own impact.</small></span></label>
+                <label class="perspective-option"><input type="checkbox" data-perspective="manager" checked><span><b>Manager</b><small>Uses the imported reporting manager.</small></span></label>
+                <label class="perspective-option"><input type="checkbox" data-perspective="skip_manager"><span><b>Skip-level manager</b><small>The manager of the subject’s manager.</small></span></label>
+                <label class="perspective-option"><input type="checkbox" data-perspective="direct_report"><span><b>Direct reports</b><small>People who report to the feedback subject.</small></span></label>
+                <label class="perspective-option"><input type="checkbox" data-perspective="same_team"><span><b>Same-team colleagues</b><small>Colleagues in the subject’s own department.</small></span></label>
+                <label class="perspective-option"><input type="checkbox" data-perspective="peer" checked><span><b>Peers</b><small>People with the same designation across Orbit.</small></span></label>
+                <label class="perspective-option"><input type="checkbox" data-perspective="cross_functional"><span><b>Cross-functional partners</b><small>Choose people from other teams or roles.</small></span></label>
+                <label class="perspective-option"><input type="checkbox" data-perspective="external"><span><b>External customers</b><small>Add named customer or partner contacts.</small></span></label>
+              </div>
+              <p class="form-note" id="rater-rule-note"></p>
+              <div class="form-grid rater-filter-controls" id="rater-filter-controls">
+                <label>Choose cross-functional partners by<select id="rater-scope"><option value="individual">Individual people</option><option value="department">Department</option><option value="job_title">Designation / job title</option><option value="department_job_title">Department + designation</option><option value="entire_organization">Entire active organization</option></select></label>
+              </div>
+              <div class="audience-filter-panel" id="rater-filter-panel"></div>
+              <div class="audience-current-actions" id="rater-current-actions"></div>
+              <div class="audience-group" id="rater-group-summary"></div>
+              <section class="external-contact-panel hidden" id="external-contact-panel">
+                <div class="external-contact-head"><div><b>External customer contacts</b><small>External contacts do not need an Orbit account. They receive a branded, secure feedback link only after you approve and send the cycle.</small></div></div>
+                <div class="external-contact-grid">
+                  <form id="external-contact-form">
+                    <b>Add one contact</b>
+                    <label>Feedback subject<select id="external-subject" required></select></label>
+                    <label>Contact name<input id="external-name" required placeholder="e.g. Maya Patel"></label>
+                    <label>Work email<input id="external-email" type="email" required placeholder="maya@client.com"></label>
+                    <label>Company (optional)<input id="external-company" placeholder="Client company"></label>
+                    <label>Relationship (optional)<input id="external-relationship" placeholder="Customer, partner, vendor…"></label>
+                    <button class="button secondary" type="submit">Add external contact <span>→</span></button><p class="form-note" id="external-contact-note"></p>
+                  </form>
+                  <div class="external-import-box">
+                    <b>Import contacts in bulk</b>
+                    <p>Use Excel or CSV with: <code>Feedback Subject Email</code>, <code>Full Name</code>, <code>Email</code>, plus optional <code>Company</code> and <code>Relationship</code>.</p>
+                    <input id="external-file" type="file" accept=".xlsx,.xls,.csv,text/csv" aria-label="Choose Excel or CSV file to import external contacts">
+                    <button class="button secondary" id="import-external-contacts" disabled>Import contacts <span>→</span></button><p class="form-note" id="external-import-note"></p>
+                  </div>
+                </div>
+                <div class="external-contact-list" id="external-contact-list"></div>
+              </section>
+              <div class="rater-impact" id="rater-impact"></div>
+              <div class="stage-actions"><button class="button primary" id="open-rater-review">Review rater plan <span>→</span></button><small>Nothing is sent yet. You will see the assessed group and rater plan before it is saved.</small></div>
+              <p class="form-note" id="rater-builder-note"></p>
+            </section>
+            <div class="builder-split">
+              <form class="builder-card people-stage" id="participant-form">
+                <div class="stage-label"><span>02</span><div><b>Add one person manually</b><small>Use this for an exception outside your selected group.</small></div></div>
+                <label>Cycle<select id="participant-cycle" required></select></label>
+                <label>Feedback subject<select id="participant-subject" required></select></label>
+                <label>Manager (optional)<select id="participant-manager"></select></label>
+                <div class="stage-actions"><button class="button secondary" type="submit">Add subject <span>→</span></button></div><p class="form-note" id="participant-note"></p>
+              </form>
+              <form class="builder-card people-stage" id="nomination-form">
+                <div class="stage-label"><span>04</span><div><b>Add one reviewer manually</b><small>Use this only for a one-off rater exception.</small></div></div>
+                <label>Participant<select id="nomination-participant" required></select></label>
+                <label>Rater<select id="nomination-reviewer" required></select></label>
+                <label>Rater group<select id="nomination-group"><option value="manager">Manager</option><option value="peer">Peer</option><option value="direct_report">Direct report</option><option value="external">External</option><option value="self">Self</option></select></label>
+                <div class="stage-actions"><button class="button secondary" type="submit">Add reviewer <span>→</span></button></div><p class="form-note" id="nomination-note"></p>
+              </form>
+            </div>
+            <div class="list-card nomination-list-card"><div class="list-head"><div><p class="eyebrow">Review before sending</p><h3>Rater list</h3></div><small>Approval prepares the rater list for private invitations.</small></div><div id="nomination-list" class="empty-state">No rater nominations yet.</div></div>
+            <section class="list-card invitation-delivery-card" id="invitation-delivery-card">
+              <div class="list-head"><div><p class="eyebrow">Secure delivery</p><h3>Release reviewer invitations</h3></div><small>Only approved reviewers in a live cycle receive a private link.</small></div>
+              <div class="form-grid"><label>Cycle<select id="invitation-cycle"></select></label></div>
+              <div id="invitation-delivery-summary" class="form-note">Choose a live cycle to review its approved invitations.</div>
+              <div class="stage-actions"><button class="button primary" id="send-approved-invitations" disabled>Send approved invitations <span>→</span></button><small>Each link is private, expires with the cycle, and is never shown to an administrator.</small></div>
+              <div class="stage-actions"><button class="button secondary" id="send-reminders" disabled>Send reminders <span>→</span></button><small>Goes only to reviewers already invited who have not submitted yet.</small></div>
+              <p class="form-note" id="invitation-delivery-note"></p>
+              <div class="list-head"><div><p class="eyebrow">Delivery audit</p><h3>Where each invitation stands</h3></div><small>Shows delivery progress only — never the recipient address or link.</small></div>
+              <div id="delivery-audit-list" class="empty-state">Choose a cycle to see its delivery history.</div>
+            </section>
+          </section>
+
+          <section class="view" data-panel="reports">
+            <div class="cycle-journey-head"><div><p class="eyebrow">Protected reports</p><h2>See the pattern. Protect the person.</h2><p>Orbit shows group-level evidence, never the identity behind an anonymous voice.</p></div><aside class="journey-assurance"><span>◎</span><div><b>Privacy gate active</b><small>Small anonymous groups stay withheld</small></div></aside></div>
+            <section class="builder-card"><div class="form-grid"><label>Cycle<select id="reports-cycle"><option value="">Select a cycle</option></select></label><label>Feedback subject<select id="reports-subject" disabled><option value="">Choose a cycle first</option></select></label></div><p class="form-note" id="reports-note">Choose a cycle to prepare its protected insight view.</p><div class="stage-actions"><button class="button secondary" id="export-reports-csv" disabled>Export cycle report (CSV) <span>↓</span></button><small>Every subject in this cycle, same visibility rules as the screen — a withheld group stays withheld.</small></div><div class="form-grid"><label>Automatically release when the cycle closes, at<input type="datetime-local" id="scheduled-release-at" disabled></label></div><div class="stage-actions"><button class="button secondary" id="save-scheduled-release" disabled>Save release schedule</button><small id="scheduled-release-note">Runs once daily; releases every subject in the cycle at once, same as a manual release.</small></div><div class="stage-actions"><button class="button secondary" id="mark-comments-reviewed" disabled>I've reviewed the comments <span>✓</span></button><small id="comments-reviewed-note">Read every written comment in this cycle before releasing any report.</small></div></section>
+            <section class="list-card"><div class="list-head"><div><p class="eyebrow">Report preview</p><h3 id="report-title">No report selected</h3></div><small id="report-release-status">Reports remain withheld until you explicitly release them.</small></div><div id="report-summary" class="empty-state">No individual responses are displayed here.</div><div id="report-content" class="task-grid"></div><div class="list-head"><div><p class="eyebrow">Written comments</p><h3>Read before releasing</h3></div></div><div id="report-comments"></div><div class="stage-actions"><button class="button primary" id="release-protected-report" disabled>Release protected report <span>→</span></button><small id="release-report-note">A report can be released only after its cycle is closed.</small></div></section>
+            <section class="list-card"><div class="list-head"><div><p class="eyebrow">Development</p><h3>Action plan</h3></div><small id="action-plan-note">Concrete, dated commitments for the selected feedback subject.</small></div><div id="action-plan-goals" class="task-grid"></div><div class="stage-actions"><button class="button secondary" id="add-action-goal" disabled>Add goal</button><button class="button primary" id="save-action-plan" disabled>Save action plan</button></div></section>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status"></div>
+    <div class="modal-backdrop hidden" id="rater-review-modal" role="dialog" aria-modal="true" aria-labelledby="rater-review-title">
+      <section class="review-modal-card">
+        <button class="modal-close" id="close-rater-review" aria-label="Close review">×</button>
+        <p class="eyebrow">FINAL REVIEW</p>
+        <h2 id="rater-review-title">Confirm your feedback plan.</h2>
+        <p>Review who will receive feedback and who will be asked to contribute before Orbit saves the rater list.</p>
+        <div id="rater-review-content"></div>
+        <div class="modal-actions"><button class="button secondary" id="back-to-rater-builder">Make changes</button><button class="button primary" id="confirm-rater-plan">Save rater plan <span>→</span></button></div>
+        <p class="form-note" id="rater-review-note"></p>
+      </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="orbit-platform-config.js"></script>
+    <script src="orbit-console.js"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+name: Weekly Security Audit
+
+# Runs independently of any chat session — a scheduled workflow, not a
+# reminder someone has to trigger. Mechanical checks only (dependency
+# vulnerabilities, lint conventions including the admin-client-comment
+# rule from eslint.config.mjs, and an obvious-hardcoded-secret grep); the
+# deeper reasoning-driven review (RLS policy correctness, SSRF/XSS
+# threat-modeling, auth boundary checks) that produced the 2026-09-16
+# findings this workflow's checks were built from still needs a real,
+# periodic human/agent-led audit — this is the backstop between those,
+# not a replacement for them.
+on:
+  schedule:
+    - cron: "17 6 * * 1" # Monday ~06:17 UTC
+  workflow_dispatch: {}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm --prefix apps/scorm-content ci
+
+      - name: Dependency vulnerabilities (root app)
+        run: npm audit --audit-level=high
+
+      - name: Dependency vulnerabilities (scorm-content app)
+        run: npm --prefix apps/scorm-content audit --audit-level=high
+
+      - name: Lint (includes the admin-client-justification convention)
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # Not a substitute for real secret-scanning tooling — a cheap,
+      # dependency-free tripwire for the most obvious cases (a pasted API
+      # key, a committed private key) between deeper audits.
+      - name: Grep for obviously hardcoded secrets
+        run: |
+          if grep -RInE "(sk-[a-zA-Z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN (RSA|EC|OPENSSH|PGP) PRIVATE KEY-----)" \
+            --include="*.ts" --include="*.tsx" --include="*.js" --include="*.mjs" \
+            --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=.git .; then
+            echo "::error::Possible hardcoded secret found in the lines above."
+            exit 1
+          fi
+
+      - name: File an issue when anything above failed
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = new Date().toISOString().slice(0, 10);
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Weekly security audit failed — ${today}`,
+              body: [
+                "The scheduled weekly security audit workflow failed.",
+                "",
+                `Run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+                "",
+                "This covers dependency vulnerabilities, lint (including the createAdminClient() justification rule), typecheck, and an obvious-secret grep — check the failed step's log for which one tripped.",
+              ].join("\n"),
+              labels: ["security"],
+            });

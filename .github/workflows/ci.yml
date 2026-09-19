@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      # Standalone Cloudflare Workers under spikes/ are excluded from the Next.js
+      # tsconfig (workerd globals conflict with `lib: dom`), so they get their own
+      # pass — otherwise they would drift untypechecked.
+      - run: npm run typecheck:jobs
+      - run: npm run lint
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: placeholder
+      # Tenant-isolation suite (docs/TESTING.md §4-5) — runs against a real,
+      # disposable local Supabase instance via Docker (preinstalled on
+      # ubuntu-latest runners), never the real project. `npm test` starts it
+      # and leaves it running for the e2e step below.
+      - run: npm test
+      # Playwright golden path (docs/TESTING.md §6, flow #1) — drives the
+      # real signup/org/invite/accept UI against the same local Supabase
+      # instance. `npm run test:e2e` re-runs `supabase start` itself too
+      # (a harmless no-op if it's already up), so this step doesn't
+      # silently depend on step ordering above.
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+
+  # Separate job, not a step in `checks`: this suite builds and runs
+  # *two* Next.js apps at once (docs/SCORM_CONTENT_ISOLATION_ARCHITECTURE.md),
+  # roughly doubling build time, and its own webServer config needs its
+  # own Supabase instance since GitHub Actions jobs don't share runners.
+  # A failure here does not block the main `checks` job from reporting —
+  # kept intentionally visible rather than silently local-only, per the
+  # instruction that added it, but isolated so a flake in the newer,
+  # more complex two-server harness can't block an unrelated PR.
+  #
+  # Added 2026-08-23 with 2 consecutive clean local runs (~2.5-3 min
+  # each) as the only reliability evidence so far — worth watching its
+  # first several CI runs before treating a failure here as equally
+  # trustworthy as a `checks` failure.
+  scorm-isolation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm --prefix apps/scorm-content ci
+      - run: npx supabase start --ignore-health-check
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config=playwright.isolation.config.ts

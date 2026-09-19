@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  // `spikes/` holds standalone Cloudflare Workers, not Next.js code. They use
+  // the workerd global types (which conflict with `lib: dom`) and are
+  // typechecked by their own tsconfig via `npm run typecheck:jobs`.
+  //
+  // `apps/scorm-content/` is a second, independently deployed Next.js app
+  // (docs/SCORM_CONTENT_ISOLATION_ARCHITECTURE.md) — it needs its own
+  // Next.js plugin instance and its own `.next/types`, which can't share
+  // this tsconfig any more than a second `next dev` could share this
+  // app's `.next` directory. Typechecked via `npm run typecheck:content`.
+  "exclude": ["node_modules", "spikes", "apps"]
+}

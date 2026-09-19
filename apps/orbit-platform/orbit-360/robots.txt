@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /orbit-360/platform-admin.html
+Disallow: /orbit-360/quick-cycle.html
+Disallow: /orbit-360/report.html
+Disallow: /orbit-360/review.html
+
+Sitemap: https://app.example.com/sitemap.xml

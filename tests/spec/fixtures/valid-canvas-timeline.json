@@ -1,0 +1,98 @@
+{
+  "specSchemaVersion": "1.0.0",
+  "meta": {
+    "title": "Evacuation Route Walkthrough",
+    "locale": "en",
+    "accessibilityProfile": "wcag-2.2-aa"
+  },
+  "variables": [
+    { "id": "routeSeen", "name": "Route seen", "type": "boolean", "scope": "course", "initial": false }
+  ],
+  "sections": [
+    {
+      "id": "walkthrough",
+      "title": "Walkthrough",
+      "pages": [
+        {
+          "id": "floorplan",
+          "title": "Ground floor route",
+          "layout": {
+            "mode": "canvas",
+            "width": 1280,
+            "height": 720,
+            "scaling": "fit"
+          },
+          "timeline": {
+            "durationMs": 12000,
+            "autoplay": true,
+            "cuePoints": [{ "id": "route-start", "name": "Route begins", "atMs": 2000 }],
+            "tracks": [
+              {
+                "blockId": "floor-image",
+                "appearAtMs": 0,
+                "animations": [
+                  {
+                    "id": "floor-fade",
+                    "kind": "entrance",
+                    "preset": "fade",
+                    "startMs": 0,
+                    "durationMs": 600,
+                    "easing": "easeOut"
+                  }
+                ]
+              },
+              {
+                "blockId": "walker",
+                "appearAtMs": 2000,
+                "animations": [
+                  {
+                    "id": "walk-path",
+                    "kind": "motion",
+                    "startMs": 2000,
+                    "durationMs": 8000,
+                    "easing": "linear",
+                    "path": {
+                      "kind": "polyline",
+                      "points": [
+                        { "x": 120, "y": 560 },
+                        { "x": 470, "y": 560 },
+                        { "x": 470, "y": 220 },
+                        { "x": 980, "y": 220 }
+                      ],
+                      "orientToPath": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "blocks": [
+            {
+              "id": "floor-image",
+              "type": "image",
+              "assetId": "6f1d3c62-9a1b-4c8e-8f2a-1b4c8e9a1b4c",
+              "position": { "x": 0, "y": 0, "width": 1280, "height": 720, "unit": "px", "zIndex": 0 },
+              "a11y": { "altText": "Ground floor plan showing the marked evacuation route to the north exit" }
+            },
+            {
+              "id": "walker",
+              "type": "image",
+              "assetId": "2c9e4a71-7b3d-4e51-9a6f-3d5e71b3d4e5",
+              "position": { "x": 120, "y": 560, "width": 48, "height": 96, "unit": "px", "zIndex": 5 },
+              "a11y": { "decorative": true },
+              "triggers": [
+                {
+                  "id": "mark-seen",
+                  "when": "timelineComplete",
+                  "actions": [
+                    { "kind": "setVariable", "variableId": "routeSeen", "operation": "set", "value": true }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

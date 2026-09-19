@@ -1,0 +1,10 @@
+.coming-shell{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+.coming-main{display:grid;place-items:center;padding:80px 24px}
+.coming-card{position:relative;width:min(830px,100%);overflow:hidden;padding:76px 55px;border:1px solid #e5d9fb;border-radius:18px;background:#fbf8ff;text-align:center}
+.coming-card:before{position:absolute;inset:0;background-image:linear-gradient(rgba(138,70,245,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(138,70,245,.1) 1px,transparent 1px);background-size:24px 24px;content:""}
+.coming-card>*{position:relative}
+.coming-card .badge{display:inline-block;margin-bottom:20px;border:0;background:#efe4ff;color:#6d2fd3}
+.coming-card h1{margin-bottom:18px;font-size:clamp(48px,7vw,76px)}
+.coming-card p:last-of-type{max-width:550px;margin:0 auto 28px;color:#606172;font-size:17px;line-height:1.55}
+.coming-actions{display:flex;justify-content:center;gap:12px}
+@media(max-width:500px){.coming-card{padding:55px 24px}.coming-actions{flex-direction:column}}

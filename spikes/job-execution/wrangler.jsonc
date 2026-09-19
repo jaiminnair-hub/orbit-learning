@@ -1,0 +1,26 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "learning-platform-jobs-spike",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-14",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "workflows": [
+    {
+      "binding": "COURSE_GENERATION",
+      "name": "course-generation-spike",
+      "class_name": "CourseGenerationSpikeWorkflow"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "SPIKE_DB",
+      "database_name": "lms-job-spike",
+      // Local runs use a miniflare-managed SQLite file and ignore this id.
+      // Throwaway database, created for this spike only — holds no tenant data.
+      "database_id": "0d9d9386-b0ef-4f12-b50d-61b08a6d645b"
+    }
+  ]
+}

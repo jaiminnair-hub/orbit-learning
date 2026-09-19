@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="description" content="Answer a few prompts and let Orbit draft your 360 feedback cycle questions and structure for you to review and approve." />
+    <title>Orbit | Quick create a 360 cycle</title>
+    <link rel="stylesheet" href="orbit-console.css?v=20260821" />
+    <link rel="stylesheet" href="orbit-sanskrit.css?v=1" />
+    <link rel="stylesheet" href="quick-cycle.css?v=1" />
+  </head>
+  <body>
+    <main class="quick-shell" id="quick-shell">
+      <header class="quick-head">
+        <a class="brand" href="/"><span>O</span> Orbit</a>
+        <div>
+          <p class="eyebrow">360 Feedback · Quick create</p>
+          <h1>Set up a feedback cycle in a few steps.</h1>
+          <p class="quick-sub">Everything here uses the same secure, confidential delivery as the full builder — this is just a faster way to fill it in. Nothing is sent until you approve and launch at the end.</p>
+        </div>
+        <a class="quick-fallback" href="orbit-console.html">Use the full builder instead</a>
+      </header>
+
+      <p class="quick-note" id="quick-note"></p>
+
+      <div class="quick-resume-bar hidden" id="quick-resume-bar">
+        <label>Continue a draft cycle
+          <select id="resume-draft-select"><option value="">Start a new cycle</option></select>
+        </label>
+      </div>
+
+      <section class="quick-step hidden" id="step-org">
+        <div class="quick-step-head"><span class="quick-step-num">0</span><h2 id="org-step-title">Set up your organisation</h2></div>
+        <p class="quick-step-hint" id="org-step-hint"></p>
+
+        <form id="quick-org-form" class="hidden">
+          <div class="quick-grid">
+            <label>Organisation name<input id="quick-org-name" type="text" placeholder="Acme Corp" required /></label>
+            <label>Workspace URL<span class="quick-slug-prefix">orbit.app/</span><input id="quick-org-slug" type="text" placeholder="acme-corp" required /></label>
+          </div>
+          <button type="submit" class="quick-btn primary quick-btn--spaced">Create organisation →</button>
+        </form>
+
+        <button type="button" id="quick-org-action" class="quick-btn primary hidden"></button>
+        <p class="quick-launch-note" id="org-step-note"></p>
+      </section>
+
+      <div id="quick-cycle-steps">
+      <section class="quick-step" id="step-subject" data-step="1">
+        <div class="quick-step-head">
+          <span class="quick-step-num">1</span><h2>Who is this about?</h2>
+          <button type="button" class="quick-info" data-info-target="info-1" aria-label="Why this step exists">ⓘ</button>
+        </div>
+        <p class="quick-info-panel hidden" id="info-1">This is the person receiving confidential feedback. Only people already in your private workforce directory can be picked here — if they're missing, add them via <a href="orbit-console.html">People</a> in the full builder first.</p>
+        <p class="quick-step-hint">Search your private workforce directory for the person receiving feedback.</p>
+        <input id="subject-search" type="text" placeholder="Search by name…" autocomplete="off" />
+        <div class="quick-search-results" id="subject-results"></div>
+        <div class="quick-chosen" id="subject-chosen"></div>
+      </section>
+
+      <section class="quick-step" id="step-reviewers" data-step="2">
+        <div class="quick-step-head">
+          <span class="quick-step-num">2</span><h2>Who is reviewing?</h2>
+          <button type="button" class="quick-info" data-info-target="info-2" aria-label="Why this step exists">ⓘ</button>
+        </div>
+        <p class="quick-info-panel hidden" id="info-2">Reviewers can come from your own directory, a whole department at once, someone outside your organisation by email, or a spreadsheet. The subject can never review themselves — Orbit removes them automatically if they end up in this list. Nothing is sent to anyone until you approve and launch in step 5.</p>
+        <p class="quick-step-hint">Search the directory, pick a whole department, add someone by email, or upload a list.</p>
+        <p class="quick-step-hint">Need reporting-hierarchy or department-wide reviewers auto-computed? Use <a href="orbit-console.html">the full builder</a> instead — this page keeps that logic in one place.</p>
+        <button type="button" id="add-manager-reviewer" class="quick-btn secondary hidden"></button>
+        <div class="quick-tabs" role="tablist">
+          <button type="button" class="quick-tab active" data-reviewer-tab="search">Search people</button>
+          <button type="button" class="quick-tab" data-reviewer-tab="department">By department</button>
+          <button type="button" class="quick-tab" data-reviewer-tab="external">Add by email</button>
+          <button type="button" class="quick-tab" data-reviewer-tab="upload">Upload a file</button>
+        </div>
+        <div class="quick-tab-panel" data-reviewer-panel="search">
+          <input id="reviewer-search" type="text" placeholder="Search by name…" autocomplete="off" />
+          <div class="quick-search-results" id="reviewer-results"></div>
+        </div>
+        <div class="quick-tab-panel hidden" data-reviewer-panel="department">
+          <select id="department-select"><option value="">Choose a department…</option></select>
+        </div>
+        <div class="quick-tab-panel hidden" data-reviewer-panel="external">
+          <div class="quick-external-form">
+            <input id="external-name" type="text" placeholder="Full name" />
+            <input id="external-email" type="email" placeholder="Work email" />
+            <button type="button" id="add-external" class="quick-btn secondary">Add</button>
+          </div>
+        </div>
+        <div class="quick-tab-panel hidden" data-reviewer-panel="upload">
+          <p class="quick-step-hint">Excel or CSV with two columns: <b>Full Name</b> and <b>Email</b>. One row per reviewer — no need to repeat the subject, that's already set in step 1.</p>
+          <label class="quick-file-picker" for="reviewer-file"><input id="reviewer-file" type="file" accept=".xlsx,.xls,.csv" /><span>↑ Choose Excel or CSV file</span><small id="reviewer-file-name">No file selected</small></label>
+          <p class="quick-step-hint" id="reviewer-upload-note"></p>
+          <button type="button" id="import-reviewer-file" class="quick-btn secondary" disabled>Add these reviewers</button>
+        </div>
+        <div class="quick-chosen-list" id="reviewer-chosen"></div>
+        <div id="pending-reviewers"></div>
+      </section>
+
+      <section class="quick-step" id="step-questions" data-step="3">
+        <div class="quick-step-head">
+          <span class="quick-step-num">3</span><h2>What should they be asked?</h2>
+          <button type="button" class="quick-info" data-info-target="info-3" aria-label="Why this step exists">ⓘ</button>
+        </div>
+        <p class="quick-info-panel hidden" id="info-3">AI can draft a starting set of questions based on the purpose you pick — it's told the purpose and a generic department, never who the subject actually is, so it can produce a weak question at worst, never a privacy mistake. Edit, remove, or replace anything it suggests before moving on.</p>
+        <p class="quick-step-hint">Pick a purpose, then let AI draft a starting set of questions — review, edit, or regenerate before anything is saved. This is the only step that uses AI, and it never sees names.</p>
+        <select id="question-purpose">
+          <option value="development">Development</option>
+          <option value="performance">Formal performance review</option>
+          <option value="peer_check_in">Peer check-in</option>
+          <option value="custom">Custom</option>
+        </select>
+        <textarea id="question-custom-note" class="hidden" placeholder="Briefly describe the purpose of this cycle…"></textarea>
+        <div class="quick-ai-row">
+          <button type="button" id="suggest-questions" class="quick-btn ai">✨ Suggest questions</button>
+          <span class="quick-ai-status" id="ai-status"></span>
+        </div>
+        <div class="quick-question-list" id="question-list"></div>
+        <div class="quick-question-actions">
+          <button type="button" id="add-question-manual" class="quick-btn secondary small">+ Add a question manually</button>
+          <label class="quick-file-picker small" for="question-file"><input id="question-file" type="file" accept=".xlsx,.xls,.csv" /><span>↑ Upload a question file</span><small id="question-file-name">Columns: Question, Question Type (rating/open text), Competency</small></label>
+        </div>
+      </section>
+
+      <section class="quick-step" id="step-schedule" data-step="4">
+        <div class="quick-step-head">
+          <span class="quick-step-num">4</span><h2>When, and how private?</h2>
+          <button type="button" class="quick-info" data-info-target="info-4" aria-label="Why this step exists">ⓘ</button>
+        </div>
+        <p class="quick-info-panel hidden" id="info-4">The anonymity threshold decides how many reviewers must respond before a group's ratings and comments become visible in the report. Below that number, individual answers stay withheld — even from you as the administrator — so a small reviewer group can never be traced back to one person.</p>
+        <div class="quick-grid">
+          <label>Feedback opens<input id="quick-opens" type="datetime-local" /></label>
+          <label>Feedback closes<input id="quick-closes" type="datetime-local" /></label>
+          <label>Anonymous group threshold
+            <select id="quick-threshold">
+              <option value="3" selected>3 or more reviewers</option>
+              <option value="4">4 or more reviewers</option>
+              <option value="5">5 or more reviewers</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="quick-step" id="step-review" data-step="5">
+        <div class="quick-step-head">
+          <span class="quick-step-num">5</span><h2>Review &amp; launch</h2>
+          <button type="button" class="quick-info" data-info-target="info-5" aria-label="Why this step exists">ⓘ</button>
+        </div>
+        <p class="quick-info-panel hidden" id="info-5">Nothing above has been sent or made live yet — everything so far is a private draft only you can see. Clicking launch below creates the cycle, sets it live, and sends a private invitation link to every reviewer listed above. This is the one irreversible step.</p>
+        <div class="quick-summary" id="quick-summary"></div>
+        <p class="quick-warn" id="quick-threshold-warning"></p>
+        <button type="button" id="launch-quick-cycle" class="quick-btn primary" disabled>Approve &amp; launch this cycle →</button>
+        <p class="quick-launch-note" id="launch-note"></p>
+      </section>
+
+      <section class="quick-step" id="step-reports" data-step="6">
+        <div class="quick-step-head">
+          <span class="quick-step-num">6</span><h2>Manage &amp; release reports</h2>
+          <button type="button" class="quick-info" data-info-target="info-6" aria-label="Why this step exists">ⓘ</button>
+        </div>
+        <p class="quick-info-panel hidden" id="info-6">A report can only be released after its cycle is closed — closing stops new responses so what you release can't change afterward. Below the anonymity threshold, a group's scores and comments stay withheld here too, exactly as they do everywhere else in Orbit.</p>
+        <p class="quick-step-hint">Pick any cycle — including ones you launched earlier — to close it and release its report.</p>
+        <select id="reports-cycle-select"><option value="">Choose a cycle…</option></select>
+        <div id="reports-cycle-status"></div>
+        <div id="reports-delivery"></div>
+        <div id="reports-content"></div>
+      </section>
+      </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="orbit-platform-config.js"></script>
+    <script src="quick-cycle.js"></script>
+  </body>
+</html>

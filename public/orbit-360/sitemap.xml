@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://app.example.com/</loc></url>
+  <url><loc>https://app.example.com/orbit-360/feedback.html</loc></url>
+  <url><loc>https://app.example.com/orbit-360/learning.html</loc></url>
+  <url><loc>https://app.example.com/orbit-360/orbit-console.html</loc></url>
+  <url><loc>https://app.example.com/orbit-360/corporate.html</loc></url>
+  <url><loc>https://app.example.com/orbit-360/privacy.html</loc></url>
+  <url><loc>https://app.example.com/orbit-360/terms.html</loc></url>
+  <url><loc>https://app.example.com/orbit-360/cookies.html</loc></url>
+  <url><loc>https://app.example.com/orbit-360/security.html</loc></url>
+</urlset>

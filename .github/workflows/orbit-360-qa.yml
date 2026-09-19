@@ -1,0 +1,53 @@
+name: Orbit 360 QA
+
+on:
+  push:
+    branches: [main]
+    paths: ["apps/orbit-platform/**"]
+  pull_request:
+    paths: ["apps/orbit-platform/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  structural-checks:
+    # Fast, no external dependencies -- runs on every push and PR touching
+    # apps/orbit-platform so a regression (inline styles the CSP blocks,
+    # dead relative links, a non-canonical domain link, a dangling asset
+    # reference) fails the build immediately instead of going unnoticed,
+    # which is what let the bugs this check now covers ship in the first
+    # place.
+    name: Structural checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: node apps/orbit-platform/orbit-360/navigation.test.mjs
+
+  secure-reviewer-workflow:
+    # Real synthetic admin + reviewer run against a local Supabase --
+    # slow and needs Foundation's schema/secrets, so this stays
+    # manually triggered rather than on every push.
+    name: Synthetic 360 Admin and Reviewer
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: node apps/orbit-platform/orbit-360/navigation.test.mjs
+      - run: npx supabase start --workdir apps/orbit-platform/orbit-foundation --ignore-health-check
+      - run: node apps/orbit-platform/orbit-foundation/tests/qa/secure-reviewer-workflow.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: orbit-360-qa-${{ github.run_id }}
+          path: artifacts/360-qa/
+          retention-days: 30

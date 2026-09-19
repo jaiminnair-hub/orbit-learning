@@ -1,0 +1,78 @@
+# Whitelist-style .gitignore for the Orbit 360 baseline repository.
+#
+# This directory is a large, shared workspace containing several unrelated
+# projects (MoneyPrinterTurbo — its own separate git repository — plus
+# leadership_intelligence, simulation_builder_redesign, orbit-foundation,
+# shani-short, work, and a long tail of legacy pre-reorg root pages that
+# vercel.json now redirects away from). None of that belongs in this
+# repository. Only the Orbit 360 front-end and its LMS-entry Edge Function
+# are tracked here — everything else stays physically in place, untracked.
+
+# Ignore everything by default.
+/*
+
+# Re-include only the tracked directories, then progressively re-include
+# their contents so nothing sibling to them leaks in.
+!/orbit-360/
+
+# Keep the narrowly scoped, authenticated 360-access bootstrap endpoint with
+# the product source. Other legacy root API files remain outside this baseline.
+!/api/
+/api/*
+!/api/feedback-access.js
+!/api/feedback-invitations.js
+!/api/feedback-review.js
+!/api/feedback-reports.js
+!/api/feedback-suggest-questions.js
+!/api/feedback-invitation-webhook.js
+!/api/feedback-replace-reviewer.js
+
+# Orbit Foundation is the shared product, organization, and 360 Feedback
+# schema that backs the Orbit 360 front-end. Keep its migrations, tests,
+# auth templates, and architecture documentation in the same private source
+# repository as the application.
+!/orbit-foundation/
+!/orbit-foundation/**
+
+# Keep the authoritative 360 status and activation runbook alongside the
+# product source without admitting unrelated shared-workspace documents.
+!/docs/
+/docs/*
+!/docs/products/
+/docs/products/*
+!/docs/products/360-degree-feedback.md
+!/docs/products/360-invitation-delivery.md
+!/docs/navigation-reset.md
+
+!/\.github/
+!/.github/workflows/
+!/.github/workflows/orbit-360-qa.yml
+
+!/supabase/
+/supabase/*
+!/supabase/functions/
+/supabase/functions/*
+!/supabase/functions/mint-lms-entry-token/
+!/supabase/functions/platform-feedback-health/
+
+# Keep the real, deployed question-import template with the product source --
+# orbit-console.html links to it directly, so it can't depend on this one
+# shared workspace's local disk state to exist. Nothing else under /outputs/
+# (unrelated demo exports, preview PNGs, debug inspect files) belongs here.
+!/outputs/
+/outputs/*
+!/outputs/orbit-question-template/
+/outputs/orbit-question-template/*
+!/outputs/orbit-question-template/orbit-360-question-import-template.xlsx
+
+# Re-include the specific tracked root files.
+!/vercel.json
+!/.vercelignore
+!/.gitignore
+!/README.md
+
+# Belt-and-suspenders: never track env files or dependency trees even if
+# one turns up inside a tracked directory later.
+**/.env
+**/.env.*
+**/node_modules/

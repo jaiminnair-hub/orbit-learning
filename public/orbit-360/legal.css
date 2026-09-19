@@ -1,0 +1,11 @@
+body.legal-page{background:#fffdfa}.legal-shell{max-width:860px;margin:0 auto;padding:90px 24px 110px}.legal-shell .kicker{margin-bottom:15px}.legal-shell h1{margin-bottom:23px;font-size:clamp(48px,6vw,75px)}.legal-lead{max-width:690px;margin-bottom:45px;color:#5e5c6d;font-size:18px;line-height:1.6}.legal-notice{margin:0 0 48px;padding:17px 19px;border:1px solid #ddd1fb;border-radius:8px;background:#f8f4ff;color:#514d62;font-size:13px;line-height:1.55}.legal-stack{display:grid;gap:36px}.legal-stack section{padding-top:29px;border-top:1px solid #e5e1e9}.legal-stack h2{margin:0 0 12px;font-size:28px;font-weight:500;letter-spacing:-.7px}.legal-stack p,.legal-stack li{color:#5f5c6a;font-size:15px;line-height:1.66}.legal-stack p{margin:0}.legal-stack ul{margin:12px 0 0;padding-left:21px}.legal-stack a{color:#743be1}.legal-meta{margin-top:45px;color:#888491;font-size:12px}.legal-page .nav-shell{background:#fffdfa}@media(max-width:600px){.legal-shell{padding:68px 22px 76px}.legal-stack h2{font-size:25px}}
+
+/* Shared Orbit Sanskrit visual language for the public policy routes. */
+:root{--legal-ink:#0a0a0f;--legal-paper:#ffffff;--legal-muted:#71717a;--legal-border:#e4e4e7;--legal-learning:#0d7d82;--legal-feedback:#8d3a73;--legal-saffron:#b56b06;--legal-saffron-surface:#fff5df}
+body.legal-page,.legal-page .nav-shell,.legal-page .legal-shell{background:var(--legal-paper)!important;color:var(--legal-ink)!important;font-family:Inter,Arial,Helvetica,sans-serif}
+.legal-shell h1,.legal-stack h2{font-family:inherit;font-weight:700;letter-spacing:-.035em}
+.legal-lead,.legal-stack p,.legal-stack li,.legal-meta{color:var(--legal-muted)!important}
+.legal-notice{border-color:color-mix(in srgb,var(--legal-saffron) 35%,var(--legal-border))!important;border-radius:1.25rem!important;background:var(--legal-saffron-surface)!important;color:var(--legal-ink)!important}
+.legal-stack section{border-color:var(--legal-border)!important;border-top:3px solid var(--legal-learning)!important}
+.legal-stack section:nth-child(2n){border-top-color:var(--legal-feedback)!important}
+.legal-stack a{color:var(--legal-feedback)!important}

@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* Shared Orbit visual language. This is presentation-only and deliberately
+   does not change product data, authentication, invitation, or report code. */
+:root {
+  --orbit-indigo: #022153;
+  --orbit-ink: #0a0a0f;
+  --orbit-paper: #ffffff;
+  --orbit-muted: #f4f4f5;
+  --orbit-muted-ink: #71717a;
+  --orbit-border: #e4e4e7;
+  --orbit-learning: #0d7d82;
+  --orbit-learning-surface: #e8f8f7;
+  --orbit-feedback: #8d3a73;
+  --orbit-feedback-surface: #fbeef5;
+  --orbit-growth: #357a45;
+  --orbit-growth-surface: #edf8ee;
+  --orbit-saffron: #b56b06;
+  --orbit-saffron-surface: #fff5df;
+  --orbit-energy: #c65325;
+  --orbit-energy-surface: #fff0e9;
+  --orbit-radius-sm: .625rem;
+  --orbit-radius-card: 1.25rem;
+  --sans: "Inter", Arial, Helvetica, sans-serif;
+  --serif: "Inter", Arial, Helvetica, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--orbit-paper); color: var(--orbit-ink); font-family: Inter, Arial, Helvetica, sans-serif; }
+button, input, select, textarea { font-family: inherit; }
+h1, h2, h3,
+.overview-hero h1,
+.gate-copy h1,
+.today-card b,
+.stage-label b,
+.cycle-list-card .list-head h3,
+.nomination-list-card .list-head h3,
+.directory-list-card .list-head h3,
+.directory-value-grid b,
+.import-copy h3,
+.people-flow b,
+.audience-group-head b { font-family: "Inter", Arial, Helvetica, sans-serif !important; }
+
+.nav-shell,
+.site-header,
+.workspace-header {
+  border-color: var(--orbit-border) !important;
+  background: color-mix(in srgb, var(--orbit-paper) 88%, transparent) !important;
+  backdrop-filter: blur(18px);
+}
+
+.logo-orbit,
+.brand span,
+.orbit-mark,
+.brand-mark {
+  border-radius: var(--orbit-radius-sm) !important;
+  background: var(--orbit-indigo) !important;
+  color: var(--orbit-paper) !important;
+}
+
+.button.primary,
+.button--primary,
+.nav-demo,
+.primary-action,
+button[type="submit"] {
+  border-radius: var(--orbit-radius-sm) !important;
+  border-color: var(--orbit-indigo) !important;
+  background: var(--orbit-indigo) !important;
+  color: var(--orbit-paper) !important;
+}
+
+.button.secondary,
+.button--secondary,
+.text-button {
+  border-radius: var(--orbit-radius-sm) !important;
+  border-color: var(--orbit-border) !important;
+  background: var(--orbit-muted) !important;
+  color: var(--orbit-ink) !important;
+}
+
+.button.primary:hover,
+.button--primary:hover,
+.nav-demo:hover,
+.primary-action:hover,
+button[type="submit"]:hover { opacity: .9; }
+
+.eyebrow,
+.kicker,
+.auth-eyebrow,
+.auth-kicker { color: var(--orbit-feedback) !important; }
+
+.builder-card,
+.list-card,
+.journey-assurance,
+.anonymity-card,
+.review-card,
+.legal-stack>section,
+.feature-card,
+.product-card,
+.workspace-card,
+.report-card,
+.empty-state {
+  border-color: var(--orbit-border) !important;
+  border-radius: var(--orbit-radius-card) !important;
+  background: var(--orbit-paper) !important;
+  box-shadow: 0 .75rem 1.75rem color-mix(in srgb, var(--orbit-indigo) 5%, transparent);
+}
+
+.cycle-journey-head,
+.people-hero,
+.review-shell,
+.workspace-hero,
+.legal-shell { color: var(--orbit-ink); }
+
+.cycle-steps li.active,
+.people-flow article:first-child { border-color: color-mix(in srgb, var(--orbit-learning) 35%, var(--orbit-border)) !important; background: var(--orbit-learning-surface) !important; }
+.people-flow article:nth-child(2),
+.cycle-steps li:nth-child(2) { border-color: color-mix(in srgb, var(--orbit-feedback) 35%, var(--orbit-border)) !important; background: var(--orbit-feedback-surface) !important; }
+.people-flow article:nth-child(3),
+.cycle-steps li:nth-child(3) { border-color: color-mix(in srgb, var(--orbit-growth) 35%, var(--orbit-border)) !important; background: var(--orbit-growth-surface) !important; }
+.people-flow article:nth-child(4),
+.cycle-steps li:nth-child(4) { border-color: color-mix(in srgb, var(--orbit-saffron) 35%, var(--orbit-border)) !important; background: var(--orbit-saffron-surface) !important; }
+
+.stage-label>span,
+.cycle-steps li.active>span,
+.people-flow article>span { border-radius: var(--orbit-radius-sm) !important; background: var(--orbit-indigo) !important; color: var(--orbit-paper) !important; }
+
+input, select, textarea,
+.file-picker { border-color: var(--orbit-border) !important; border-radius: var(--orbit-radius-sm) !important; background: var(--orbit-paper) !important; color: var(--orbit-ink) !important; }
+input:focus, select:focus, textarea:focus { border-color: var(--orbit-indigo) !important; box-shadow: 0 0 0 3px color-mix(in srgb, var(--orbit-indigo) 14%, transparent) !important; }
+
+.form-note,
+.muted,
+.legal-lead,
+.legal-meta { color: var(--orbit-muted-ink) !important; }
+.privacy-note { color: var(--orbit-feedback) !important; }
+.status-live,
+.is-complete,
+.success { color: var(--orbit-growth) !important; }
+
+/* Legacy public and policy routes use their own lightweight markup. */
+.nav { border-color: var(--orbit-border) !important; background: color-mix(in srgb, var(--orbit-paper) 88%, transparent) !important; backdrop-filter: blur(18px); }
+.nav .brand span,
+.nav .brand>span { border-radius: var(--orbit-radius-sm) !important; background: var(--orbit-indigo) !important; color: var(--orbit-paper) !important; }
+.nav-cta,
+.nav .button,
+.hero .button,
+.cta .button { border-radius: var(--orbit-radius-sm) !important; background: var(--orbit-indigo) !important; color: var(--orbit-paper) !important; }
+.hero,
+.section,
+.workflow,
+.platform,
+.security { background-color: var(--orbit-paper) !important; color: var(--orbit-ink) !important; }
+.cards article,
+.modules article,
+.workflow ol li,
+.coming-card { border-color: var(--orbit-border) !important; border-radius: var(--orbit-radius-card) !important; background: var(--orbit-paper) !important; color: var(--orbit-ink) !important; box-shadow: 0 .75rem 1.75rem color-mix(in srgb, var(--orbit-indigo) 5%, transparent) !important; }
+.cards article:nth-child(1),
+.modules article:nth-child(1) { border-top: 4px solid var(--orbit-learning) !important; }
+.cards article:nth-child(2),
+.modules article:nth-child(2) { border-top: 4px solid var(--orbit-feedback) !important; }
+.cards article:nth-child(3),
+.modules article:nth-child(3) { border-top: 4px solid var(--orbit-growth) !important; }
+.coming-card:before { opacity: .16; }
+.coming-card .badge { background: var(--orbit-feedback-surface) !important; color: var(--orbit-feedback) !important; }
+
+.legal-page { background: var(--orbit-paper) !important; color: var(--orbit-ink) !important; }
+.legal-page .legal-shell { background: var(--orbit-paper) !important; }
+.legal-page .legal-notice { border-color: color-mix(in srgb, var(--orbit-saffron) 35%, var(--orbit-border)) !important; background: var(--orbit-saffron-surface) !important; color: var(--orbit-ink) !important; }
+.legal-page .legal-stack>section { border-top: 3px solid var(--orbit-learning) !important; }
+.legal-page .legal-stack>section:nth-child(2n) { border-top-color: var(--orbit-feedback) !important; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --orbit-ink: #fafafa;
+    --orbit-paper: #111118;
+    --orbit-muted: #18181b;
+    --orbit-muted-ink: #a1a1aa;
+    --orbit-border: #27272a;
+    --orbit-learning: #5cc9c6;
+    --orbit-learning-surface: #123c3c;
+    --orbit-feedback: #e58abb;
+    --orbit-feedback-surface: #442239;
+    --orbit-growth: #7acb88;
+    --orbit-growth-surface: #1d4026;
+    --orbit-saffron: #f2c26f;
+    --orbit-saffron-surface: #4a391d;
+    --orbit-energy: #f29b78;
+    --orbit-energy-surface: #4d2a21;
+  }
+}

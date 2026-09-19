@@ -1,0 +1,17 @@
+{
+  "$schema": "../../../node_modules/wrangler/config-schema.json",
+  "name": "learning-platform-jobs-caller-spike",
+  "main": "index.ts",
+  "compatibility_date": "2026-08-14",
+  "compatibility_flags": ["nodejs_compat"],
+  "workflows": [
+    {
+      "binding": "COURSE_GENERATION",
+      "name": "course-generation-spike",
+      "class_name": "CourseGenerationSpikeWorkflow",
+      // The whole point: the class lives in another worker. This is the shape
+      // the Next.js app will use, since OpenNext owns its own worker entrypoint.
+      "script_name": "learning-platform-jobs-spike"
+    }
+  ]
+}

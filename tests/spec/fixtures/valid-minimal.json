@@ -1,0 +1,43 @@
+{
+  "specSchemaVersion": "1.0.0",
+  "meta": {
+    "title": "Workplace Fire Safety",
+    "locale": "en"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "title": "Introduction",
+      "pages": [
+        {
+          "id": "welcome",
+          "title": "Welcome",
+          "blocks": [
+            {
+              "id": "welcome-heading",
+              "type": "heading",
+              "text": "Welcome to Fire Safety",
+              "level": 1
+            },
+            {
+              "id": "welcome-text",
+              "type": "text",
+              "content": {
+                "blocks": [
+                  {
+                    "kind": "paragraph",
+                    "spans": [
+                      { "text": "This course takes about " },
+                      { "text": "20 minutes", "marks": ["bold"] },
+                      { "text": " to complete." }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

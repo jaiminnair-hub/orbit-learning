@@ -1,0 +1,10 @@
+# This directory is a shared workspace with several unrelated projects
+# sitting alongside the real Orbit 360 site (see .gitignore for the full
+# picture). Only this one file actually causes a live problem: a stray,
+# untracked root-level index.html from an old pre-Orbit prototype shadows
+# the "/" route ahead of vercel.json's rewrite to the real landing page.
+# Everything else at the workspace root deploys unchanged (some of it,
+# like the extra files under /api/, is real production code that isn't
+# git-tracked here but must still ship) -- so this stays a single,
+# narrowly-targeted exclusion rather than a broad allowlist.
+/index.html

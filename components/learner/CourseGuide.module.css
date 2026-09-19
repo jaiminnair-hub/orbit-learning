@@ -1,0 +1,47 @@
+.panel {
+  margin-top: 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--card-foreground);
+}
+
+.panel summary {
+  display: flex;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  font-weight: 700;
+}
+
+.panel summary::-webkit-details-marker { display: none; }
+.panel summary span { color: var(--accent); }
+.body { border-top: 1px solid var(--border); padding: 1.25rem; }
+.context { margin: 0 0 1rem; color: var(--muted-foreground); font-size: .875rem; }
+.prompts { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+.prompts button, .submit {
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  padding: .55rem .75rem;
+  font: inherit;
+  cursor: pointer;
+}
+.prompts button:hover, .prompts button:focus-visible { border-color: var(--accent); }
+.form { display: grid; grid-template-columns: 1fr auto; gap: .5rem; }
+.form label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.form input { min-width: 0; border: 1px solid var(--input); background: var(--background); color: var(--foreground); padding: .7rem .8rem; }
+.submit { background: var(--primary); color: var(--primary-foreground); font-weight: 700; }
+.submit:disabled, .prompts button:disabled { cursor: wait; opacity: .55; }
+.answer { margin-top: 1rem; border-left: 3px solid var(--accent); background: var(--muted); padding: 1rem; }
+.answer p { margin: 0; white-space: pre-wrap; line-height: 1.65; }
+.sources { display: grid; gap: .4rem; margin-top: 1rem; }
+.sources a { color: var(--foreground); font-size: .82rem; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.error { margin-top: 1rem; color: var(--destructive); }
+
+@media (max-width: 640px) {
+  .form { grid-template-columns: 1fr; }
+  .submit { width: 100%; }
+}
