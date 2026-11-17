@@ -28,13 +28,13 @@
     "@vercel/functions": "^3.9.5",
     "fflate": "^0.8.3",
     "mammoth": "^1.12.1",
-    "next": "16.3.5",
+    "next": "16.4.5",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "three": "^0.185.1",
-    "undici": "^7.29.0",
+    "undici": "7.30.1",
     "unpdf": "^1.8.1",
-    "zod": "^4.4.3"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
@@ -46,13 +46,20 @@
     "@types/react-dom": "^19",
     "@types/three": "^0.185.4",
     "eslint": "^9",
-    "eslint-config-next": "16.3.1",
+    "eslint-config-next": "16.4.5",
     "jsdom": "^30.0.1",
     "pg": "^8.23.0",
     "supabase": "^2.114.0",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^4.1.10",
+    "vitest": "^4.1.12",
     "wrangler": "^4.123.0"
+  },
+  "overrides": {
+    "undici@<8": "7.30.1",
+    "undici@>=8": "^8.12.2",
+    "vite": "^8.3.3",
+    "@vitest/mocker": "4.1.12",
+    "brace-expansion@<2": "1.1.21"
   }
 }
